@@ -39,7 +39,7 @@ export default function NavBar() {
                   <Link href="/recipes">
                     <a
                       href="#"
-                      className=" text-gray-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                      className=" text-gray-500 inline-flex items-center px-1 pt-1 text-sm font-medium"
                     >
                       Recipes
                     </a>

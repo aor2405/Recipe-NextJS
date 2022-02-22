@@ -4,9 +4,9 @@ import AllRecipe from './Logo/AllRecipe';
 
 export default function RecipeCard() {
   return (
-    <div className="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
+    <div className="relative bg-slate-100 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
       <div className="absolute inset-0">
-        <div className="bg-white h-1/3 sm:h-2/3">
+        <div className=" h-1/3 sm:h-2/3">
           <NavBar />
         </div>
       </div>
