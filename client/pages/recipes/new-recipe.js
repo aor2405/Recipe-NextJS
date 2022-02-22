@@ -1,7 +1,36 @@
-import Button from '../../components/Button';
 import NavBar from '../../components/layout/mainNavigation';
+import { useState } from 'react';
 
-export default function Example() {
+export default function NewRecipeForm() {
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    method: '',
+    ingredients: '',
+  });
+
+  function handleChange(e) {
+    const value = e.target.value;
+    setFormData({
+      ...formData,
+      [e.target.name]: value,
+    });
+    console.log(formData);
+  }
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    console.log('You clicked submit.');
+    try {
+      const body = { formData };
+      axios.post('/server/index', {
+        body,
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return (
     <>
       <NavBar />
@@ -29,7 +58,7 @@ export default function Example() {
               </div>
             </div>
             <div className="mt-5 md:mt-0 md:col-span-2">
-              <form action="#" method="POST">
+              <form onSubmit={submitHandler}>
                 <div className="shadow sm:rounded-md sm:overflow-hidden">
                   <div className="px-4 py-5 bg-slate-50 space-y-6 sm:p-6">
                     <div>
@@ -40,12 +69,13 @@ export default function Example() {
                         Recipe Title
                       </label>
                       <div className="mt-1">
-                        <textarea
-                          id="recipetitle"
-                          name="recipetitle"
-                          rows={2}
+                        <input
+                          type="text"
+                          id="title"
+                          name="title"
                           className="shadow-sm focus:ring-teal-500 focus:border-teal-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                          defaultValue={''}
+                          value={formData.title}
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
@@ -63,7 +93,8 @@ export default function Example() {
                           name="description"
                           rows={3}
                           className="shadow-sm focus:ring-teal-500 focus:border-teal-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                          defaultValue={''}
+                          value={formData.description}
+                          onChange={handleChange}
                         />
                       </div>
                       <p className="mt-2 text-sm text-gray-500">
@@ -81,7 +112,8 @@ export default function Example() {
                           name="ingredients"
                           rows={3}
                           className="shadow-sm focus:ring-teal-500 focus:border-teal-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                          defaultValue={''}
+                          value={formData.ingredients}
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
@@ -96,7 +128,8 @@ export default function Example() {
                           name="method"
                           rows={3}
                           className="shadow-sm focus:ring-teal-500 focus:border-teal-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                          defaultValue={''}
+                          value={formData.method}
+                          onChange={handleChange}
                         />
                       </div>
                     </div>
@@ -144,7 +177,9 @@ export default function Example() {
                     </div>
                   </div>
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                    <Button name="Submit" />
+                    <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-teal-500 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
+                      Submit
+                    </button>
                   </div>
                 </div>
               </form>
